@@ -16,10 +16,10 @@ public class TradingStrategy {
     public TradingStrategy(PriceSource priceSource, PriceListener priceListener) {
         this.priceSource = priceSource;
         this.priceListener = priceListener;
+        this.priceSource.addPriceListener(priceListener);
     }
 
     public void processStock(String security, String stockName) {
-        this.priceSource.addPriceListener(priceListener);
         double stockPrice = priceSource.getStockPrice(stockName);
         if (priceSource.getStockPrice(stockName) > 0) {
             priceListener.priceUpdate(security, stockPrice);
